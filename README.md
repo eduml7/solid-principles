@@ -29,3 +29,18 @@ Indica que una clase si tiene una implementación y es necesaria otra, no debe m
 **####KO**
 
 * Si hay un nuevo animal se extiende la clase AnimalFeatures, pero además AnimalControl tiene la voz de los animales y distingue entre ellos para poder lanzar su voz, luego si hay un nuevo animal tendra que ser modificada
+
+## Liskov Substitution
+
+Si hay una clase padre que en algun momento se extiende, si esta clase padre se sustituye en todos los escenarios del programa por cada una de las clases hijas en el código, todo debería funcionar igual de bien que con la clase padre.
+ 
+**####OK**
+
+* La clase AnimalFeatures tiene entre otros un metodo move que gestiona el movimiento basico del animal, en caso de un gato corre, pero en caso de un pato o un buho llama al metodo de volar.
+* Si en la clase AnimalControl sustituyes AnimalFeatures por CatFeatures, OwlFeatures o DuckFeatures el animal se movera en cualquiera de los casos.  
+
+**####KO**
+
+* La clase AnimalFeatures tiene las acciones que pueden llevar a cabo los animales. El método fly pone a volar un animal.
+* Las clases CatFeatures, DuckFeatures y OwlFeatures definen como vuela el animal, en el caso de gato no hace nada porque los gatos no vuelan.
+* Si se sustituye AnimalFeatures por cualquiera de los tres anteriores, tanto el buho como el pato volarán, pero el gato no hará nada.
