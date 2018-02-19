@@ -44,3 +44,17 @@ Si hay una clase padre que en algun momento se extiende, si esta clase padre se 
 * La clase AnimalFeatures tiene las acciones que pueden llevar a cabo los animales. El método fly pone a volar un animal.
 * Las clases CatFeatures, DuckFeatures y OwlFeatures definen como vuela el animal, en el caso de gato no hace nada porque los gatos no vuelan.
 * Si se sustituye AnimalFeatures por cualquiera de los tres anteriores, tanto el buho como el pato volarán, pero el gato no hará nada.
+
+## Interface Segregation
+
+Las clases no deberían tener metodos que no usen. Si una clase implementa una interfaz con dos metodos y uno no le aplica, crea otra interfaz nueva que englobe los casos que no son comunes.
+ 
+**####OK**
+
+* La clase AnimalFeatures tiene las acciones comunes de todos los animales. Como no todos los animales pueden volar, se crea una interfaz con las características específicas de las aves, entre las cuales una de ellas es volar.
+* Así, los gatos no tienen nada que ver con volar, y los patos pueden hacerlo. Además, ambos pueden comunicarse. 
+
+**####KO**
+
+* Como en el ejemplo de LSP, la clase AnimalFeatures tiene las acciones que pueden llevar a cabo los animales. El método fly pone a volar un animal.
+* Las clases CatFeatures y DuckFeatures definen como vuela el animal, en el caso de gato no hace nada porque los gatos no vuelan.
