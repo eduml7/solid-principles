@@ -58,3 +58,20 @@ Las clases no deberían tener metodos que no usen. Si una clase implementa una i
 
 * Como en el ejemplo de LSP, la clase AnimalFeatures tiene las acciones que pueden llevar a cabo los animales. El método fly pone a volar un animal.
 * Las clases CatFeatures y DuckFeatures definen como vuela el animal, en el caso de gato no hace nada porque los gatos no vuelan.
+
+## Dependency Injection
+
+Las clases no deberían de depender de implementaciones concretas, ya que si lo hacen acoplan el código a esas implementaciones y si en un futuro cambian, habría que cambiar tambien las clases que las usan.
+ 
+**####OK**
+
+* La clase AnimalFeatures es una interfaz con la accion voz de los animales.
+* La clase CatFeatures define como es la voz de un gato.
+* La clase AnimalControl recibe un AnimalFeatures en el constructor, en vez de instanciar un CatFeatures. Despues lanza la voz del animal.
+* Si en vez de un gato necesitasemos un perro, solo hay que crear la clase que defina un ladrido y alimentar el constructor de AnimalControl con una instancia de perro, lo cual hace que no haya que modificar el controlador de animales.  
+
+**####KO**
+
+* La clase CatFeatures tiene las características de un gato, como lanza un maullido. 
+* La clase AnimalControl instancia un gato, y luego hace uso del metodo voice para lanzar un maullido.
+* Si ya no se necesitase un maullido, sino un ladrido, deberíamos crear una clase con las caracteristicas del perro y modificar AnimalControl para instanciar el perro. 
